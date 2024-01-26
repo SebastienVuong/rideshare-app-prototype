@@ -20,8 +20,12 @@ export const RootNavigator = () => {
   const [userType, setUserType] = useState<EUserType>()
 
   const loadUserStack = () => {
-    if (userType === "rider") return RiderStackScreens
-    if (userType === "driver") return DriverStackScreens
+    if (userType === "rider") {
+      return RiderStackScreens
+    }
+    if (userType === "driver") {
+      return DriverStackScreens
+    }
     return (
       <>
         <Stack.Screen

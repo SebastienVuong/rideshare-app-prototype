@@ -20,6 +20,11 @@ module.exports = {
             group: "internal",
             position: "after",
           },
+          {
+            pattern: "server/**",
+            group: "internal",
+            position: "after",
+          },
         ],
         pathGroupsExcludedImportTypes: ["internal"],
         alphabetize: {
