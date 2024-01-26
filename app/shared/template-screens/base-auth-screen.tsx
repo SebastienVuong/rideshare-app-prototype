@@ -11,6 +11,7 @@ import {
 import {EUserType} from "app/core/navigation/root-navigator"
 import {useNavigation} from "app/core/navigation/use-navigation.hook"
 import {useRequest} from "app/core/network/request-service"
+import {driversService} from "app/services/driver"
 import {ridersService} from "app/services/rider"
 import {Button} from "app/shared/components/button"
 import {GlobalStyles} from "app/shared/styles"
@@ -30,10 +31,10 @@ const options: {
     nextRoute: "RiderHome2",
   },
   [EUserType.DRIVER]: {
-    registerFunction: ridersService.create,
-    getAllUsersFunction: ridersService.list,
+    registerFunction: driversService.create,
+    getAllUsersFunction: driversService.list,
     userTypeLabel: "Driver",
-    nextRoute: "DriverHome",
+    nextRoute: "DriverHome2",
   },
 }
 

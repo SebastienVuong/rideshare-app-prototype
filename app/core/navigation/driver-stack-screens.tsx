@@ -1,6 +1,6 @@
 import React from "react"
 
-import {DefaultLanding} from "app/features/default-landing"
+import {DriverLandingScreen} from "app/features/driver/landing/screen"
 
 import {Stack} from "./root-navigator"
 
@@ -10,7 +10,12 @@ export const DriverStackScreens = (
     <Stack.Screen
       name="DriverHome"
       options={{title: "Driver Home"}}
-      component={DefaultLanding}
+      component={DriverLandingScreen}
+    />
+    <Stack.Screen
+      name="DriverHome2"
+      options={{title: "Driver Home 2"}}
+      component={DriverLandingScreen}
     />
   </>
 )
