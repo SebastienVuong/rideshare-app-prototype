@@ -5,6 +5,8 @@ import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
 
+import android.os.Bundle // required for onCreate parameter
+
 class MainActivity : ReactActivity() {
 
   /**
@@ -19,4 +21,11 @@ class MainActivity : ReactActivity() {
    */
   override fun createReactActivityDelegate(): ReactActivityDelegate =
       DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
+
+  /**
+   * For react-native-screens, used by react-navigation, to work properly we need to pass null
+   */
+  override fun onCreate(savedInstanceState: Bundle?) {
+      super.onCreate(null)
+  }
 }
