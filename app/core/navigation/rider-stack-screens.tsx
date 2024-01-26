@@ -1,6 +1,6 @@
 import React from "react"
 
-import {DefaultLanding} from "app/features/default-landing"
+import {RiderLandingScreen} from "app/features/rider/landing/screen"
 
 import {Stack} from "./root-navigator"
 
@@ -10,7 +10,12 @@ export const RiderStackScreens = (
     <Stack.Screen
       name="RiderHome"
       options={{title: "Rider Home"}}
-      component={DefaultLanding}
+      component={RiderLandingScreen}
+    />
+    <Stack.Screen
+      name="RiderHome2"
+      options={{title: "Rider Home 2"}}
+      component={RiderLandingScreen}
     />
   </>
 )

@@ -1,6 +1,9 @@
 import {useEffect} from "react"
 
+<<<<<<< HEAD
 import {ERideStatus} from "./database/rides-table"
+=======
+>>>>>>> 968d679 (feat: implement Rider Auth screen)
 import {endpoints} from "./endpoints/endpoints"
 
 const initializeRiders = async () => {
@@ -13,7 +16,6 @@ const initializeRiders = async () => {
   await endpoints.rider.create({name: "Rider 2"})
   await endpoints.rider.create({name: "Rider 3"})
 }
-
 const initializeDrivers = async () => {
   const drivers = await endpoints.driver.list()
   if (drivers?.length) {

@@ -33,11 +33,8 @@ export const Welcome = ({navigation, setUserType}: IWelcomeProps) => {
     <View style={{flex: 1, backgroundColor: "#FFFFFF"}}>
       <Text
         style={{
+          ...GlobalStyles.textStyles.title,
           flex: 1,
-          textAlign: "center",
-          paddingTop: 50,
-          fontSize: 36,
-          color: GlobalStyles.colors.primary,
         }}>
         I am a Goober...
       </Text>

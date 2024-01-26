@@ -13,7 +13,7 @@ import {GlobalStyles} from "app/shared/styles"
 interface IButtonProps extends TouchableOpacityProps {
   text: string
   textStyle?: TextStyle
-  style: ViewStyle
+  style?: ViewStyle
 }
 export const Button = ({text, textStyle, onPress, style}: IButtonProps) => (
   <TouchableOpacity
