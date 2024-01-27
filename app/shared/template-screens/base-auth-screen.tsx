@@ -18,6 +18,7 @@ import {driversService} from "app/services/driver"
 import {ridersService} from "app/services/rider"
 import {Button} from "app/shared/components/button"
 import {GlobalStyles} from "app/shared/styles"
+import {TDriver, TRider} from "app/types/api-response"
 
 const options: {
   [key in EUserType]: {
@@ -31,22 +32,25 @@ const options: {
     registerFunction: ridersService.create,
     getAllUsersFunction: ridersService.list,
     userTypeLabel: "Rider",
+    // FIXME: Replicate Driver pattern
     nextRoute: "RiderHome2",
   },
   [EUserType.DRIVER]: {
     registerFunction: driversService.create,
     getAllUsersFunction: driversService.list,
     userTypeLabel: "Driver",
-    nextRoute: "DriverHome2",
+    nextRoute: "DriverHome",
   },
 }
+
+type TUser = TRider | TDriver
 
 export const BaseAuthScreen = ({userType}: {userType: EUserType}) => {
   const setUser = useSetAtom(userAtom)
   const {navigate} = useNavigation()
   const props = options[userType]
 
-  const {loading: isUsersListLoading, data: users} = useRequest({
+  const {loading: isUsersListLoading, data: users} = useRequest<TUser[]>({
     request: props.getAllUsersFunction,
   })
   const [name, setName] = React.useState("")

@@ -1,30 +1,20 @@
 import React from "react"
 import {Text, View} from "react-native"
 
-import {EUserType} from "app/core/navigation/root-navigator"
-import {INavigationProp} from "app/core/navigation/types"
+import {useNavigation} from "app/core/navigation/use-navigation.hook"
 import {Button} from "app/shared/components/button"
 import {GlobalStyles} from "app/shared/styles"
 
-interface IWelcomeProps extends INavigationProp {
-  setUserType: (userType: EUserType) => void
-}
-
-export const Welcome = ({navigation, setUserType}: IWelcomeProps) => {
+export const Welcome = () => {
+  const {navigate} = useNavigation()
   const userButtonsProps = [
     {
       text: "Rider",
-      onPress: () => {
-        setUserType(EUserType.RIDER)
-        navigation.navigate("Home2")
-      },
+      onPress: () => navigate("Rider"),
     },
     {
       text: "Driver",
-      onPress: () => {
-        setUserType(EUserType.DRIVER)
-        navigation.navigate("Home2")
-      },
+      onPress: () => navigate("Driver"),
     },
   ]
 
