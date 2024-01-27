@@ -8,6 +8,9 @@ import {
   View,
 } from "react-native"
 
+import {useSetAtom} from "jotai"
+
+import {userAtom} from "app/core/atoms/userAtoms"
 import {EUserType} from "app/core/navigation/root-navigator"
 import {useNavigation} from "app/core/navigation/use-navigation.hook"
 import {useRequest} from "app/core/network/request-service"
@@ -39,6 +42,7 @@ const options: {
 }
 
 export const BaseAuthScreen = ({userType}: {userType: EUserType}) => {
+  const setUser = useSetAtom(userAtom)
   const {navigate} = useNavigation()
   const props = options[userType]
 
@@ -67,7 +71,7 @@ export const BaseAuthScreen = ({userType}: {userType: EUserType}) => {
           text={`Register ${name}`}
           onPress={async () => {
             const me = await props.registerFunction(name)
-            console.log({me})
+            setUser(me)
             navigate(props.nextRoute)
           }}
         />
@@ -83,6 +87,7 @@ export const BaseAuthScreen = ({userType}: {userType: EUserType}) => {
             <TouchableOpacity
               onPress={() => {
                 navigate(props.nextRoute)
+                setUser(item)
               }}
               style={styles.returningUserOption}>
               <Text>{`Reconnect as ${item.name}`}</Text>
