@@ -1,5 +1,8 @@
 import {database} from "server/database/database"
 import {ERideStatus, IRide} from "server/database/rides-table"
+import {getDistance} from "server/utils/get-distance"
+
+const ACCEPTABLE_DISTANCE_TO_PICKUP = 10
 
 interface IRideByRiderIdArgs {
   riderId: Pick<IRide, "rider_id">["rider_id"]
@@ -29,9 +32,22 @@ export const rideEndpoints = {
       return await database.rides.getByRiderId(riderId)
     }
   },
-  list: async (driverId?: string) => {
+  list: async ({
+    driverId,
+    driverLocation,
+  }: {
+    driverId?: string
+    driverLocation: string
+  }) => {
     const rides = await database.rides.list(driverId)
-    return rides
+    const nearbyRides = rides.filter((ride: IRide) => {
+      const distanceToPickup = getDistance({
+        departure: driverLocation,
+        arrival: ride.pickup_location,
+      })
+      return distanceToPickup < ACCEPTABLE_DISTANCE_TO_PICKUP
+    })
+    return nearbyRides
   },
   accept: async ({id, driver_id}: Pick<IRide, "id" | "driver_id">) => {
     const ride = await database.rides.get(id)
