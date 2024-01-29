@@ -12,15 +12,13 @@ export const DriverRideList = ({
 }: {
   rides?: TRide[]
   refetch: () => Promise<void>
-}) => {
-  return (
-    <View style={{flex: 1}}>
-      <Text style={GlobalStyles.textStyles.title}>Open Rides:</Text>
-      <FlatList
-        data={rides}
-        renderItem={({item}) => <RideListItem ride={item} refetch={refetch} />}
-        keyExtractor={(item) => item.id}
-      />
-    </View>
-  )
-}
+}) => (
+  <View style={{flex: 1}}>
+    <Text style={GlobalStyles.textStyles.title}>Open Rides:</Text>
+    <FlatList
+      data={rides}
+      renderItem={({item}) => <RideListItem ride={item} refetch={refetch} />}
+      keyExtractor={(item) => item.id}
+    />
+  </View>
+)

@@ -1,5 +1,6 @@
 import React from "react"
 
+import {RiderHomeScreen} from "app/features/rider/home/rider-home"
 import {RiderLandingScreen} from "app/features/rider/landing/screen"
 
 import {Stack} from "./root-navigator"
@@ -9,14 +10,13 @@ export const RiderNavigator = () => (
   <Stack.Navigator>
     <Stack.Screen
       name="RiderAuthentication"
-      options={{title: "Rider Home"}}
+      options={{title: "Goober Rider"}}
       component={RiderLandingScreen}
     />
     <Stack.Screen
       name="RiderHome"
-      options={{title: "Rider Home 2"}}
-      // XXX(Seb): This is a mock
-      component={RiderLandingScreen}
+      options={{title: "Rider Home "}}
+      component={RiderHomeScreen}
     />
   </Stack.Navigator>
 )

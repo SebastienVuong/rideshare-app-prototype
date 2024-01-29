@@ -8,15 +8,15 @@ import {useRequest} from "app/core/network/request-service"
 import {ridesService} from "app/services/ride"
 import {TRider} from "app/types/api-response"
 
-import {RiderRideDetails} from "./screens/rider-ride-details"
 import {RideRequestForm} from "./screens/ride-request-form"
+import {RiderRideDetails} from "./screens/rider-ride-details"
 
 export const RiderHomeScreen = () => {
   const {id: riderId} = useAtomValue(userAtom) as TRider
   const {
     loading: isCurrentRideLoading,
     data: currentRide,
-    // fetch: fetchCurrentRide,
+    fetch: fetchCurrentRide,
   } = useRequest({
     request: useCallback(
       async () => ridesService.getForRiderId(riderId),
@@ -31,6 +31,6 @@ export const RiderHomeScreen = () => {
   return currentRide ? (
     <RiderRideDetails ride={currentRide} />
   ) : (
-    <RideRequestForm />
+    <RideRequestForm refetch={fetchCurrentRide} />
   )
 }

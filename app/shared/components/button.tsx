@@ -15,10 +15,17 @@ interface IButtonProps extends TouchableOpacityProps {
   textStyle?: TextStyle
   style?: ViewStyle
 }
-export const Button = ({text, textStyle, onPress, style}: IButtonProps) => (
+
+export const Button = ({
+  text,
+  textStyle,
+  onPress,
+  style,
+  disabled,
+}: IButtonProps) => (
   <TouchableOpacity
     onPress={onPress}
-    style={{...styles.defaultButton, ...style}}>
+    style={{...styles.defaultButton, ...style, opacity: disabled ? 0.2 : 1}}>
     <Text style={{...styles.defaultText, ...textStyle}}>{text}</Text>
   </TouchableOpacity>
 )

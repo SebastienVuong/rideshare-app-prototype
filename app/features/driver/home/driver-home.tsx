@@ -33,6 +33,7 @@ export const DriverHomeScreen = () => {
   if (isCurrentRideLoading) {
     return <Text>Loading...</Text>
   }
+
   return currentRide ? (
     <DriverRideDetails ride={currentRide} refetch={fetchCurrentRide} />
   ) : (

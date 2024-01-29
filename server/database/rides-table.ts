@@ -10,7 +10,7 @@ export enum ERideStatus {
 
 export interface IRide {
   id: string
-  rider_id?: string
+  rider_id: string
   driver_id?: string
   pickup_location: string
   dropoff_location: string

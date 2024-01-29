@@ -12,10 +12,12 @@ interface IRideByDriverIdArgs {
 type IRideByIdArgs = IRideByRiderIdArgs | IRideByDriverIdArgs
 
 export const rideEndpoints = {
-  create: async (ride: Omit<IRide, "id">) => {
+  create: async (ride: Omit<IRide, "id" | "declined_by" | "status">) => {
     const rides = await database.rides.list()
     return await database.rides.add({
       id: rides.length.toString(),
+      declined_by: [],
+      status: ERideStatus.REQUESTED,
       ...ride,
     })
   },

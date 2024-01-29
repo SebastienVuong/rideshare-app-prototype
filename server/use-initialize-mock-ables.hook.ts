@@ -1,11 +1,8 @@
 import {useEffect} from "react"
 
-<<<<<<< HEAD
-import {ERideStatus} from "./database/rides-table"
-=======
->>>>>>> 968d679 (feat: implement Rider Auth screen)
+// import AsyncStorage from "@react-native-async-storage/async-storage"
+
 import {endpoints} from "./endpoints/endpoints"
-import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const initializeRiders = async () => {
   const riders = await endpoints.rider.list()
@@ -35,22 +32,19 @@ const initializeRides = async () => {
   }
 
   await endpoints.ride.create({
+    rider_id: "0",
     pickup_location: "Pickup Location 1",
     dropoff_location: "Dropoff Location 1",
-    declined_by: [],
-    status: ERideStatus.REQUESTED,
   })
   await endpoints.ride.create({
+    rider_id: "1",
     pickup_location: "Pickup Location 2",
     dropoff_location: "Dropoff Location 2",
-    declined_by: [],
-    status: ERideStatus.REQUESTED,
   })
   await endpoints.ride.create({
+    rider_id: "2",
     pickup_location: "Pickup Location 3",
     dropoff_location: "Dropoff Location 3",
-    declined_by: [],
-    status: ERideStatus.REQUESTED,
   })
 }
 

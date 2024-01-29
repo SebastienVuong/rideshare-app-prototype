@@ -37,4 +37,18 @@ export const ridesService = {
     await endpoints.ride.update({id: rideId, status: ERideStatus.CANCELLED}),
   getAvailable: async (driverId: string): Promise<TRide[]> =>
     await endpoints.ride.list(driverId),
+  request: async ({
+    riderId,
+    pickupLocation,
+    dropoffLocation,
+  }: {
+    riderId: string
+    pickupLocation: string
+    dropoffLocation: string
+  }): Promise<TRide | undefined> =>
+    await endpoints.ride.create({
+      rider_id: riderId,
+      pickup_location: pickupLocation,
+      dropoff_location: dropoffLocation,
+    }),
 }

@@ -1,12 +1,5 @@
 import React from "react"
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native"
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native"
 
 import {useSetAtom} from "jotai"
 
@@ -17,6 +10,7 @@ import {useRequest} from "app/core/network/request-service"
 import {driversService} from "app/services/driver"
 import {ridersService} from "app/services/rider"
 import {Button} from "app/shared/components/button"
+import {TextInput} from "app/shared/components/text-input"
 import {GlobalStyles} from "app/shared/styles"
 import {TDriver, TRider} from "app/types/api-response"
 
@@ -32,8 +26,7 @@ const options: {
     registerFunction: ridersService.create,
     getAllUsersFunction: ridersService.list,
     userTypeLabel: "Rider",
-    // FIXME: Replicate Driver pattern
-    nextRoute: "RiderHome2",
+    nextRoute: "RiderHome",
   },
   [EUserType.DRIVER]: {
     registerFunction: driversService.create,
@@ -66,11 +59,7 @@ export const BaseAuthScreen = ({userType}: {userType: EUserType}) => {
           style={
             GlobalStyles.textStyles.title
           }>{`New ${props.userTypeLabel}?`}</Text>
-        <TextInput
-          style={styles.defaultTextInput}
-          value={name}
-          onChangeText={setName}
-        />
+        <TextInput value={name} onChangeText={setName} />
         <Button
           text={`Register ${name}`}
           onPress={async () => {
@@ -116,18 +105,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
-  },
-  defaultTextInput: {
-    height: 40,
-    width: "100%",
-    marginVertical: 12,
-    borderWidth: 1,
-    padding: 10,
-    borderColor: "#ccc",
-    borderRadius: 5,
-    fontSize: 16,
-    color: "#333",
-    backgroundColor: "#fff",
   },
   returningUserOption: {
     margin: 3,
