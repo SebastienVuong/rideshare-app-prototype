@@ -6,13 +6,19 @@ import {TRide} from "app/types/api-response"
 
 import {RideListItem} from "../components/ride-list-item"
 
-export const DriverRideList = ({rides}: {rides?: TRide[]}) => {
+export const DriverRideList = ({
+  rides,
+  refetch,
+}: {
+  rides?: TRide[]
+  refetch: () => Promise<void>
+}) => {
   return (
     <View style={{flex: 1}}>
       <Text style={GlobalStyles.textStyles.title}>Open Rides:</Text>
       <FlatList
         data={rides}
-        renderItem={({item}) => RideListItem(item)}
+        renderItem={({item}) => <RideListItem ride={item} refetch={refetch} />}
         keyExtractor={(item) => item.id}
       />
     </View>

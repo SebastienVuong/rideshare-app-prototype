@@ -7,11 +7,34 @@ export const ridesService = {
     await endpoints.ride.get({driverId}),
   getForRiderId: async (riderId: string): Promise<TRide> =>
     await endpoints.ride.get({riderId}),
+  accept: async ({
+    rideId,
+    driverId,
+  }: {
+    rideId: string
+    driverId: string
+  }): Promise<TRide> =>
+    await endpoints.ride.accept({
+      id: rideId,
+      driver_id: driverId,
+    }),
+  decline: async ({
+    rideId,
+    driverId,
+  }: {
+    rideId: string
+    driverId: string
+  }): Promise<TRide> =>
+    await endpoints.ride.decline({
+      id: rideId,
+      driver_id: driverId,
+    }),
   pickup: async (rideId: string): Promise<TRide> =>
     await endpoints.ride.update({id: rideId, status: ERideStatus.PICKED_UP}),
   dropoff: async (rideId: string): Promise<TRide> =>
     await endpoints.ride.update({id: rideId, status: ERideStatus.COMPLETED}),
   cancel: async (rideId: string): Promise<TRide> =>
     await endpoints.ride.update({id: rideId, status: ERideStatus.CANCELLED}),
-  getAvailable: async (): Promise<TRide[]> => await endpoints.ride.list(),
+  getAvailable: async (driverId: string): Promise<TRide[]> =>
+    await endpoints.ride.list(driverId),
 }

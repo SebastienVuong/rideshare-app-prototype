@@ -62,7 +62,7 @@ export const ridesTable = {
       return thisRide
     } catch {}
   },
-  list: async () => {
+  list: async (driverId?: string) => {
     try {
       const jsonRides = await AsyncStorage.getItem("rides")
       if (!jsonRides) {
@@ -71,6 +71,7 @@ export const ridesTable = {
       const rides = JSON.parse(jsonRides)
       const openRides = rides.filter(
         (ride: IRide) =>
+          !ride.declined_by.includes(driverId || "") &&
           ride.status !== ERideStatus.COMPLETED &&
           ride.status !== ERideStatus.CANCELLED,
       )

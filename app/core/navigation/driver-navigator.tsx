@@ -1,7 +1,7 @@
 import React from "react"
 
 import {DriverHomeScreen} from "app/features/driver/home/driver-home"
-import {DriverLandingScreen} from "app/features/driver/landing/screen"
+import {DriverAuthScreen} from "app/features/driver/landing/screen"
 
 import {Stack} from "./root-navigator"
 
@@ -11,7 +11,7 @@ export const DriverNavigator = () => (
     <Stack.Screen
       name="DriverAuthentication"
       options={{title: "Goober Driver"}}
-      component={DriverLandingScreen}
+      component={DriverAuthScreen}
     />
     <Stack.Screen
       name="DriverHome"

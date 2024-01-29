@@ -54,5 +54,5 @@ export const DriverRideDetails = ({
         )
     }
   }
-  return <View style={{flex: 1}}>{renderBody()}</View>
+  return <View style={{flex: 1, alignItems: "center"}}>{renderBody()}</View>
 }

@@ -27,8 +27,8 @@ export const rideEndpoints = {
       return await database.rides.getByRiderId(riderId)
     }
   },
-  list: async () => {
-    const rides = await database.rides.list()
+  list: async (driverId?: string) => {
+    const rides = await database.rides.list(driverId)
     return rides
   },
   accept: async ({id, driver_id}: Pick<IRide, "id" | "driver_id">) => {
@@ -40,6 +40,12 @@ export const rideEndpoints = {
     }
     await database.rides.update(updatedRide)
     return updatedRide
+  },
+  decline: async ({id, driver_id}: Pick<IRide, "id" | "driver_id">) => {
+    const ride = await database.rides.get(id)
+    ride.declined_by.push(driver_id)
+    await database.rides.update(ride)
+    return ride
   },
   update: async ({id, status}: Pick<IRide, "id" | "status">) => {
     const ride = await database.rides.get(id)

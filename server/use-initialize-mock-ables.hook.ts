@@ -5,6 +5,7 @@ import {ERideStatus} from "./database/rides-table"
 =======
 >>>>>>> 968d679 (feat: implement Rider Auth screen)
 import {endpoints} from "./endpoints/endpoints"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const initializeRiders = async () => {
   const riders = await endpoints.rider.list()
@@ -55,6 +56,7 @@ const initializeRides = async () => {
 
 export const useInitializeMockTables = () => {
   useEffect(() => {
+    // AsyncStorage.clear()
     initializeRiders()
     initializeDrivers()
     initializeRides()

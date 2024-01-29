@@ -12,16 +12,22 @@ import {DriverRideDetails} from "./screens/driver-ride-details"
 import {DriverRideList} from "./screens/driver-ride-list"
 
 export const DriverHomeScreen = () => {
-  const {id} = useAtomValue(userAtom) as TDriver
+  const {id: driverId} = useAtomValue(userAtom) as TDriver
   const {
     loading: isCurrentRideLoading,
     data: currentRide,
     fetch: fetchCurrentRide,
   } = useRequest({
-    request: useCallback(async () => ridesService.getForDriverId(id), [id]),
+    request: useCallback(
+      async () => ridesService.getForDriverId(driverId),
+      [driverId],
+    ),
   })
   const {data: availableRides} = useRequest<TRide[]>({
-    request: ridesService.getAvailable,
+    request: useCallback(
+      async () => ridesService.getAvailable(driverId),
+      [driverId],
+    ),
   })
 
   if (isCurrentRideLoading) {
@@ -30,6 +36,6 @@ export const DriverHomeScreen = () => {
   return currentRide ? (
     <DriverRideDetails ride={currentRide} refetch={fetchCurrentRide} />
   ) : (
-    <DriverRideList rides={availableRides} />
+    <DriverRideList rides={availableRides} refetch={fetchCurrentRide} />
   )
 }
