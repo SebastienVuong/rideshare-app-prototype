@@ -17,9 +17,11 @@ import {TDriver, TRider} from "app/types/api-response"
 const options: {
   [key in EUserType]: {
     userTypeLabel: string
-    registerFunction: any
-    getAllUsersFunction: any
-    nextRoute: string
+    registerFunction: (
+      userName: string,
+    ) => Promise<TRider | TDriver | undefined>
+    getAllUsersFunction: () => Promise<Array<TDriver | TRider>>
+    nextRoute: "RiderHome" | "DriverHome"
   }
 } = {
   [EUserType.RIDER]: {

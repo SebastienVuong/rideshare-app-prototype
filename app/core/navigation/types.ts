@@ -1,8 +1,23 @@
+import {TRootRouteNames, TRootStackParamList} from "./root-navigator"
+import {
+  TDriverRouteNames,
+  TDriverStackParamList,
+} from "../../features/driver/driver.router"
+import {
+  TRiderRouteNames,
+  TRiderStackParamList,
+} from "../../features/rider/rider.router"
+
+export type TAppRouteName =
+  | TDriverRouteNames
+  | TRiderRouteNames
+  | TRootRouteNames
+
 export interface INavigationProp {
   navigation: {
-    navigate: (routeName: TRouteName) => void
+    navigate: (routeName: TAppRouteName) => void
   }
 }
-
-// FIXME: Make route names type-safe
-type TRouteName = string
+export type TNavigationParamList = TRootStackParamList &
+  TDriverStackParamList &
+  TRiderStackParamList
