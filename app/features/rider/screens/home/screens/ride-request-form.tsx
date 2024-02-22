@@ -10,7 +10,7 @@ import {TextInput} from "app/shared/components/text-input"
 import {GlobalStyles} from "app/shared/styles"
 import {TRider} from "app/types/api-response"
 import {formatMoney} from "app/utils/format-money"
-import {calculateRidePrice} from "app/utils/get-cost"
+import {calculateRidePrice} from "app/utils/calculate-ride-price"
 
 export const RideRequestForm = ({refetch}: {refetch: () => Promise<any>}) => {
   const {id: riderId} = useAtomValue(userAtom) as TRider

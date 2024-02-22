@@ -5,7 +5,7 @@
  * @param dropoffLocation - The location where the ride ends.
  * @returns The distance between the two locations in kilometers.
  */
-export const calculateDistance = (
+export const calculateRideDistance = (
   pickupLocation: string,
   dropoffLocation: string,
 ) => {

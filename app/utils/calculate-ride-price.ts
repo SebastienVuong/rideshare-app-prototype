@@ -1,4 +1,4 @@
-import {calculateDistance} from "./get-distance"
+import {calculateRideDistance} from "./calculate-ride-distance"
 
 /**
  *  NOTE: In practice, this rate (and perhaps even the calculation) should be
@@ -25,6 +25,6 @@ export const calculateRidePrice = ({
   if (!pickupLocation || !dropoffLocation) {
     return 0
   }
-  const distance = calculateDistance(pickupLocation, dropoffLocation)
+  const distance = calculateRideDistance(pickupLocation, dropoffLocation)
   return distance * MOCK_PRICE_PER_KM
 }

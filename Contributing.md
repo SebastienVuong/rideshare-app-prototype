@@ -33,6 +33,7 @@
   - `feat` - Addition or improvement of a feature in the app
   - `refactor` - Code changes that do not (should not) change the functionality or the app
   - `setup` - Setup and configuration
+  - `test` - Changes to tests
 - The subject caption should start with a verb and not be capitalized.
 - Conventionally, git subject lines should not exceed 52 characters. However, given our use of a prefix tag, we shall push that limit up to 72 characters.
 
