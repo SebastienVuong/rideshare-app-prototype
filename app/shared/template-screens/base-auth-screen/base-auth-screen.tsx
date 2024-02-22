@@ -1,5 +1,5 @@
 import React from "react"
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native"
+import {FlatList, StyleSheet, Text, View} from "react-native"
 
 import {useSetAtom} from "jotai"
 
@@ -14,6 +14,8 @@ import {TextInput} from "app/shared/components/text-input"
 import {LoadingHandler} from "app/shared/layout/loading-handler"
 import {GlobalStyles} from "app/shared/styles"
 import {TDriver, TRider} from "app/types/api-response"
+
+import {UserSelectionItem} from "./components/user-selection-item"
 
 const options: {
   [key in EUserType]: {
@@ -51,40 +53,34 @@ export const BaseAuthScreen = ({userType}: {userType: EUserType}) => {
   })
   const [name, setName] = React.useState("")
 
+  const registerUser = async () => {
+    const me = await props.registerFunction(name)
+    setUser(me)
+    navigate(props.nextRoute)
+  }
+
   return (
     <LoadingHandler loading={isUsersListLoading}>
       <View style={styles.viewContainer}>
         <View style={styles.topSection}>
-          <Text
-            style={
-              GlobalStyles.textStyles.title
-            }>{`New ${props.userTypeLabel}?`}</Text>
+          <Text style={styles.titleStyle}>{`New ${props.userTypeLabel}?`}</Text>
           <TextInput value={name} onChangeText={setName} />
-          <Button
-            text={`Register ${name}`}
-            onPress={async () => {
-              const me = await props.registerFunction(name)
-              setUser(me)
-              navigate(props.nextRoute)
-            }}
-          />
+          <Button text={`Register ${name}`} onPress={registerUser} />
         </View>
         <View style={styles.bottomSection}>
-          <Text
-            style={
-              GlobalStyles.textStyles.title
-            }>{`Returning ${props.userTypeLabel}?`}</Text>
+          <Text style={styles.titleStyle}>
+            {`Returning ${props.userTypeLabel}?`}
+          </Text>
           <FlatList
             data={users}
-            renderItem={({item}) => (
-              <TouchableOpacity
+            renderItem={({item: user}) => (
+              <UserSelectionItem
+                text={`Reconnect as ${user.name}`}
                 onPress={() => {
                   navigate(props.nextRoute)
-                  setUser(item)
+                  setUser(user)
                 }}
-                style={styles.returningUserOption}>
-                <Text>{`Reconnect as ${item.name}`}</Text>
-              </TouchableOpacity>
+              />
             )}
             keyExtractor={(item) => item.id}
           />
@@ -107,10 +103,5 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
   },
-  returningUserOption: {
-    margin: 3,
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: GlobalStyles.colors.secondary,
-  },
+  titleStyle: GlobalStyles.textStyles.title,
 })
