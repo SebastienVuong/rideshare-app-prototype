@@ -7,6 +7,14 @@ import {calculateDistance} from "./get-distance"
  */
 const MOCK_PRICE_PER_KM = 1.5
 
+/**
+ * A function to calculate the price of a ride based on the distance between
+ * the pickup and dropoff locations.
+ *
+ * @param pickupLocation - The location where the ride starts.
+ * @param dropoffLocation - The location where the ride ends.
+ * @returns The price of the ride in dollars.
+ */
 export const calculateRidePrice = ({
   pickupLocation,
   dropoffLocation,
