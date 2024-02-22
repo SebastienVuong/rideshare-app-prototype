@@ -1,11 +1,11 @@
 import React, {useCallback} from "react"
-import {Text} from "react-native"
 
 import {useAtomValue} from "jotai"
 
 import {userAtom} from "app/core/atoms/userAtoms"
 import {useRequest} from "app/core/network/request-service"
 import {ridesService} from "app/services/ride"
+import {LoadingHandler} from "app/shared/layout/loading-handler"
 import {TRider} from "app/types/api-response"
 
 import {RideRequestForm} from "./screens/ride-request-form"
@@ -24,13 +24,13 @@ export const RiderHomeScreen = () => {
     ),
   })
 
-  if (isCurrentRideLoading) {
-    return <Text>Loading...</Text>
-  }
-
-  return currentRide ? (
-    <RiderRideDetails ride={currentRide} />
-  ) : (
-    <RideRequestForm refetch={fetchCurrentRide} />
+  return (
+    <LoadingHandler loading={isCurrentRideLoading}>
+      {currentRide ? (
+        <RiderRideDetails ride={currentRide} />
+      ) : (
+        <RideRequestForm refetch={fetchCurrentRide} />
+      )}
+    </LoadingHandler>
   )
 }

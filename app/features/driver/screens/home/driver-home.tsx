@@ -1,11 +1,11 @@
 import React, {useCallback} from "react"
-import {Text} from "react-native"
 
 import {useAtomValue} from "jotai"
 
 import {userAtom} from "app/core/atoms/userAtoms"
 import {useRequest} from "app/core/network/request-service"
 import {ridesService} from "app/services/ride"
+import {LoadingHandler} from "app/shared/layout/loading-handler"
 import {TDriver, TRide} from "app/types/api-response"
 
 import {DriverRideDetails} from "./screens/driver-ride-details"
@@ -30,13 +30,13 @@ export const DriverHomeScreen = () => {
     ),
   })
 
-  if (isCurrentRideLoading) {
-    return <Text>Loading...</Text>
-  }
-
-  return currentRide ? (
-    <DriverRideDetails ride={currentRide} refetch={fetchCurrentRide} />
-  ) : (
-    <DriverRideList rides={availableRides} refetch={fetchCurrentRide} />
+  return (
+    <LoadingHandler loading={isCurrentRideLoading}>
+      {currentRide ? (
+        <DriverRideDetails ride={currentRide} refetch={fetchCurrentRide} />
+      ) : (
+        <DriverRideList rides={availableRides} refetch={fetchCurrentRide} />
+      )}
+    </LoadingHandler>
   )
 }

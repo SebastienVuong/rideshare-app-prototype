@@ -11,6 +11,7 @@ import {driversService} from "app/services/driver"
 import {ridersService} from "app/services/rider"
 import {Button} from "app/shared/components/button"
 import {TextInput} from "app/shared/components/text-input"
+import {LoadingHandler} from "app/shared/layout/loading-handler"
 import {GlobalStyles} from "app/shared/styles"
 import {TDriver, TRider} from "app/types/api-response"
 
@@ -50,48 +51,46 @@ export const BaseAuthScreen = ({userType}: {userType: EUserType}) => {
   })
   const [name, setName] = React.useState("")
 
-  // FIXME: Implement shared loading indicator
-  if (isUsersListLoading) {
-    return <Text>Loading...</Text>
-  }
   return (
-    <View style={styles.viewContainer}>
-      <View style={styles.topSection}>
-        <Text
-          style={
-            GlobalStyles.textStyles.title
-          }>{`New ${props.userTypeLabel}?`}</Text>
-        <TextInput value={name} onChangeText={setName} />
-        <Button
-          text={`Register ${name}`}
-          onPress={async () => {
-            const me = await props.registerFunction(name)
-            setUser(me)
-            navigate(props.nextRoute)
-          }}
-        />
+    <LoadingHandler loading={isUsersListLoading}>
+      <View style={styles.viewContainer}>
+        <View style={styles.topSection}>
+          <Text
+            style={
+              GlobalStyles.textStyles.title
+            }>{`New ${props.userTypeLabel}?`}</Text>
+          <TextInput value={name} onChangeText={setName} />
+          <Button
+            text={`Register ${name}`}
+            onPress={async () => {
+              const me = await props.registerFunction(name)
+              setUser(me)
+              navigate(props.nextRoute)
+            }}
+          />
+        </View>
+        <View style={styles.bottomSection}>
+          <Text
+            style={
+              GlobalStyles.textStyles.title
+            }>{`Returning ${props.userTypeLabel}?`}</Text>
+          <FlatList
+            data={users}
+            renderItem={({item}) => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigate(props.nextRoute)
+                  setUser(item)
+                }}
+                style={styles.returningUserOption}>
+                <Text>{`Reconnect as ${item.name}`}</Text>
+              </TouchableOpacity>
+            )}
+            keyExtractor={(item) => item.id}
+          />
+        </View>
       </View>
-      <View style={styles.bottomSection}>
-        <Text
-          style={
-            GlobalStyles.textStyles.title
-          }>{`Returning ${props.userTypeLabel}?`}</Text>
-        <FlatList
-          data={users}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              onPress={() => {
-                navigate(props.nextRoute)
-                setUser(item)
-              }}
-              style={styles.returningUserOption}>
-              <Text>{`Reconnect as ${item.name}`}</Text>
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item) => item.id}
-        />
-      </View>
-    </View>
+    </LoadingHandler>
   )
 }
 
