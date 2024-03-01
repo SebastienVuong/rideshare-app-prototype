@@ -130,8 +130,3 @@ The data is coming through (mock) API requests with no polling, but WebSockets w
 Total: 7hrs 10min
 
 **_NOTE:_** I feel like I sank too much time into building a mock server, which took quite a bit of time as a front-end specialist. It also needed more refinement as I worked on the end-to-end flow for drivers. 🙈
-
-# Demos
-
-1. [Onboarding a new Rider and requesting a Ride](https://drive.google.com/file/d/168-aLFsMxz87BfkfqjqT1leJggmARN73/view?usp=drive_link)
-1. [Reconnecting as an existing Driver and accepting, picking up, and completing a Ride](https://drive.google.com/file/d/1JlZ2kU40nNZXvhg0yvSnant-G_Be3Z7D/view?usp=drive_link)
