@@ -1,12 +1,11 @@
 import React from "react"
 import {
-  TouchableOpacity,
-  Text,
   TouchableOpacityProps,
   TextStyle,
   StyleSheet,
   ViewStyle,
 } from "react-native"
+import {Button as PaperButton} from "react-native-paper"
 
 import {GlobalStyles} from "app/shared/styles"
 
@@ -23,19 +22,21 @@ export const Button = ({
   style,
   disabled,
 }: IButtonProps) => (
-  <TouchableOpacity
+  <PaperButton
+    mode="contained-tonal"
     onPress={onPress}
-    style={{...styles.defaultButton, ...style, opacity: disabled ? 0.2 : 1}}>
-    <Text style={{...styles.defaultText, ...textStyle}}>{text}</Text>
-  </TouchableOpacity>
+    disabled={disabled}
+    style={{...styles.defaultButton, ...style}}
+    labelStyle={{...styles.defaultText, ...textStyle}}>
+    {text}
+  </PaperButton>
 )
 
 const styles = StyleSheet.create({
   defaultButton: {
-    padding: 20,
-    borderRadius: 99999, // HACK: Round corners to make it look like a button
+    padding: 8,
     width: "80%",
     backgroundColor: GlobalStyles.colors.primary,
   },
-  defaultText: {color: "#FFFFFF", textAlign: "center"},
+  defaultText: {color: "#FFFFFF", textAlign: "center", fontSize: 20},
 })

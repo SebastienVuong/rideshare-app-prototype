@@ -37,9 +37,12 @@ export const rideEndpoints = {
     driverLocation,
   }: {
     driverId?: string
-    driverLocation: string
+    driverLocation?: string
   }) => {
     const rides = await database.rides.list(driverId)
+    if (!driverId || !driverLocation) {
+      return rides
+    }
     const nearbyRides = rides.filter((ride: IRide) => {
       const distanceToPickup = getDistance({
         departure: driverLocation,

@@ -20,11 +20,11 @@ const routerConfig = {
   },
   Rider: {
     component: RiderNavigator,
-    options: {title: "Rider"},
+    options: {header: () => null},
   },
   Driver: {
     component: DriverNavigator,
-    options: {title: "Driver"},
+    options: {header: () => null},
   },
 }
 
